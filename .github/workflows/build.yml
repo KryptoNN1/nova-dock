@@ -6,9 +6,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Kaynak dosyalarını aç
+      - name: Dosyalar
         shell: pwsh
-        run: Expand-Archive -Path sources.zip -DestinationPath . -Force
+        run: |
+          Get-ChildItem
+          Expand-Archive -Path sources.zip -DestinationPath . -Force
+          Get-ChildItem -Recurse src-tauri | Select-Object -First 30
       - uses: actions/setup-node@v4
         with:
           node-version: 20
