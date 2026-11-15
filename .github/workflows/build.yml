@@ -1,13 +1,14 @@
 name: Windows kurulum dosyası
 on:
   workflow_dispatch:
-  push:
-    tags: ["v*"]
 jobs:
   build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Kaynak dosyalarını aç
+        shell: pwsh
+        run: Expand-Archive -Path sources.zip -DestinationPath . -Force
       - uses: actions/setup-node@v4
         with:
           node-version: 20
